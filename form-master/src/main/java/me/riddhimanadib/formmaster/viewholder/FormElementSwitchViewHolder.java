@@ -1,16 +1,14 @@
 package me.riddhimanadib.formmaster.viewholder;
 
 import android.content.Context;
-import android.support.v7.widget.AppCompatEditText;
-import android.support.v7.widget.AppCompatTextView;
-import android.support.v7.widget.SwitchCompat;
-import android.text.InputType;
+import androidx.appcompat.widget.AppCompatEditText;
+import androidx.appcompat.widget.AppCompatTextView;
+import androidx.appcompat.widget.SwitchCompat;
+
 import android.view.View;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.CompoundButton;
 
 import me.riddhimanadib.formmaster.R;
-import me.riddhimanadib.formmaster.listener.FormItemEditTextListener;
 import me.riddhimanadib.formmaster.listener.ReloadListener;
 import me.riddhimanadib.formmaster.model.BaseFormElement;
 import me.riddhimanadib.formmaster.model.FormElementSwitch;

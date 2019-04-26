@@ -1,7 +1,7 @@
 package me.riddhimanadib.formmaster.adapter;
 
 import android.content.Context;
-import android.support.v7.widget.RecyclerView;
+import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,6 +15,7 @@ import me.riddhimanadib.formmaster.listener.OnFormElementValueChangedListener;
 import me.riddhimanadib.formmaster.model.BaseFormElement;
 import me.riddhimanadib.formmaster.viewholder.BaseViewHolder;
 import me.riddhimanadib.formmaster.viewholder.FormElementHeader;
+import me.riddhimanadib.formmaster.viewholder.FormElementPickerDateAndTimeViewHolder;
 import me.riddhimanadib.formmaster.viewholder.FormElementPickerDateViewHolder;
 import me.riddhimanadib.formmaster.viewholder.FormElementPickerMultiViewHolder;
 import me.riddhimanadib.formmaster.viewholder.FormElementPickerSingleViewHolder;
@@ -201,6 +202,9 @@ public class FormAdapter extends RecyclerView.Adapter<BaseViewHolder> implements
             case BaseFormElement.TYPE_SWITCH:
                 v = inflater.inflate(R.layout.form_element_switch, parent, false);
                 return new FormElementSwitchViewHolder(v, mContext, this);
+            case BaseFormElement.TYPE_DATE_AND_TIME:
+                v = inflater.inflate(R.layout.form_element, parent, false);
+                return new FormElementPickerDateAndTimeViewHolder(v, mContext, this);
             default:
                 v = inflater.inflate(R.layout.form_element, parent, false);
                 return new FormElementTextSingleLineViewHolder(v, new FormItemEditTextListener(this));

@@ -1,12 +1,10 @@
 package me.riddhimanadib.formmaster.viewholder;
 
-import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.content.Context;
-import android.support.v7.widget.AppCompatEditText;
-import android.support.v7.widget.AppCompatTextView;
+import androidx.appcompat.widget.AppCompatEditText;
+import androidx.appcompat.widget.AppCompatTextView;
 import android.view.View;
-import android.widget.DatePicker;
 import android.widget.TimePicker;
 
 import java.text.SimpleDateFormat;

@@ -1,9 +1,9 @@
 package me.riddhimanadib.formmaster.viewholder;
 
 import android.content.Context;
-import android.support.v7.widget.AppCompatEditText;
-import android.support.v7.widget.AppCompatTextView;
-import android.text.InputType;
+import androidx.appcompat.widget.AppCompatEditText;
+import androidx.appcompat.widget.AppCompatTextView;
+
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 

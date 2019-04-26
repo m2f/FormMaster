@@ -1,9 +1,9 @@
 package me.riddhimanadib.fastformbuilder;
 
 import android.os.Bundle;
-import android.support.v7.app.ActionBar;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.RecyclerView;
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.RecyclerView;
 import android.view.MenuItem;
 
 import java.util.ArrayList;
@@ -12,6 +12,7 @@ import java.util.List;
 import me.riddhimanadib.formmaster.FormBuilder;
 import me.riddhimanadib.formmaster.model.BaseFormElement;
 import me.riddhimanadib.formmaster.model.FormElementPickerDate;
+import me.riddhimanadib.formmaster.model.FormElementPickerDateAndTime;
 import me.riddhimanadib.formmaster.model.FormElementPickerMulti;
 import me.riddhimanadib.formmaster.model.FormElementPickerSingle;
 import me.riddhimanadib.formmaster.model.FormElementPickerTime;
@@ -77,8 +78,10 @@ public class FullscreenFormActivity extends AppCompatActivity {
 
         FormHeader header3 = FormHeader.createInstance("Schedule");
         FormElementPickerDate element31 = FormElementPickerDate.createInstance().setTitle("Date").setDateFormat("MMM dd, yyyy");
-        FormElementPickerTime element32 = FormElementPickerTime.createInstance().setTitle("Time").setTimeFormat("KK hh");
+        FormElementPickerTime element32 = FormElementPickerTime.createInstance().setTitle("Time").setTimeFormat("hh mm a");
         FormElementTextPassword element33 = FormElementTextPassword.createInstance().setTitle("Password").setValue("abcd1234");
+        FormElementPickerDateAndTime element34 = FormElementPickerDateAndTime.createInstance().setTitle("Date & Time")
+        .setDateFormat("MMM dd, yyyy").setTimeFormat("hh mm a");
 
         FormHeader header4 = FormHeader.createInstance("Preferred Items");
         List<String> fruits = new ArrayList<>();
@@ -102,12 +105,11 @@ public class FullscreenFormActivity extends AppCompatActivity {
         formItems.add(element31);
         formItems.add(element32);
         formItems.add(element33);
+        formItems.add(element34);
         formItems.add(header4);
         formItems.add(element41);
         formItems.add(element42);
         formItems.add(element43);
         mFormBuilder.addFormElements(formItems);
-
     }
-
 }
