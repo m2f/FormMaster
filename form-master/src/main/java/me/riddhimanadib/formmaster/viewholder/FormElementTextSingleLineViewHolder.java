@@ -17,6 +17,7 @@ import me.riddhimanadib.formmaster.model.BaseFormElement;
 
 public class FormElementTextSingleLineViewHolder extends BaseViewHolder {
 
+
     public AppCompatTextView mTextViewTitle;
     public AppCompatEditText mEditTextValue;
     public FormItemEditTextListener mFormCustomEditTextListener;
