@@ -25,6 +25,7 @@ public class FormElementPickerDateViewHolder extends BaseViewHolder {
 
     private AppCompatTextView mTextViewTitle;
     private AppCompatEditText mEditTextValue;
+    private AppCompatTextView mTextViewError;
     private DatePickerDialog mDatePickerDialog;
     private Calendar mCalendarCurrentDate;
     private ReloadListener mReloadListener;
@@ -33,8 +34,9 @@ public class FormElementPickerDateViewHolder extends BaseViewHolder {
 
     public FormElementPickerDateViewHolder(View v, Context context, ReloadListener reloadListener) {
         super(v);
-        mTextViewTitle = (AppCompatTextView) v.findViewById(R.id.formElementTitle);
-        mEditTextValue = (AppCompatEditText) v.findViewById(R.id.formElementValue);
+        mTextViewTitle = v.findViewById(R.id.formElementTitle);
+        mEditTextValue = v.findViewById(R.id.formElementValue);
+        mTextViewError = v.findViewById(R.id.formElementError);
         mReloadListener = reloadListener;
         mCalendarCurrentDate = java.util.Calendar.getInstance();
     }
@@ -50,10 +52,17 @@ public class FormElementPickerDateViewHolder extends BaseViewHolder {
                 mCalendarCurrentDate.get(Calendar.MONTH),
                 mCalendarCurrentDate.get(Calendar.DAY_OF_MONTH));
 
+        if(formElement.getError().isEmpty()){
+            mTextViewError.setVisibility(View.GONE);
+        } else {
+            mTextViewError.setVisibility(View.VISIBLE);
+        }
+
         mTextViewTitle.setText(formElement.getTitle());
         mEditTextValue.setText(formElement.getValue());
         mEditTextValue.setHint(formElement.getHint());
         mEditTextValue.setFocusableInTouchMode(false);
+        mTextViewError.setText(formElement.getError());
 
         mEditTextValue.setOnClickListener(new View.OnClickListener() {
             @Override

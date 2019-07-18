@@ -84,13 +84,18 @@ public class FormBuilder {
      * @return
      */
     public boolean isValidForm() {
+        boolean isValid = true;
         for (int i = 0; i < this.mFormAdapter.getItemCount(); i++) {
             BaseFormElement baseFormElement = this.mFormAdapter.getValueAtIndex(i);
             if (baseFormElement.isRequired() && TextUtils.isEmpty(baseFormElement.getValue())) {
-                return false;
+                baseFormElement.setError("The Field is required");
+                isValid = false;
+            } else {
+                baseFormElement.setError("");
             }
         }
-        return true;
+        this.mFormAdapter.notifyDataSetChanged();
+        return isValid;
     }
 
 }

@@ -63,4 +63,13 @@
 
     </LinearLayout>
 
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/formElementError"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="16dp"
+        android:textColor="@color/colorFormMasterElementTextError"
+        android:textSize="@dimen/elementTextErrorSize"
+        tools:text="Personal Info" />
+
 </LinearLayout>

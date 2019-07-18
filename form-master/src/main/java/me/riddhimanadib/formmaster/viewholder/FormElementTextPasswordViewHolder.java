@@ -17,14 +17,15 @@ import me.riddhimanadib.formmaster.model.BaseFormElement;
 
 public class FormElementTextPasswordViewHolder extends BaseViewHolder {
 
-    public AppCompatTextView mTextViewTitle;
+    public AppCompatTextView mTextViewTitle, mTextViewError;
     public AppCompatEditText mEditTextValue;
     public FormItemEditTextListener mFormCustomEditTextListener;
 
     public FormElementTextPasswordViewHolder(View v, FormItemEditTextListener listener) {
         super(v);
-        mTextViewTitle = (AppCompatTextView) v.findViewById(R.id.formElementTitle);
-        mEditTextValue = (AppCompatEditText) v.findViewById(R.id.formElementValue);
+        mTextViewTitle = v.findViewById(R.id.formElementTitle);
+        mTextViewError = v.findViewById(R.id.formElementError);
+        mEditTextValue = v.findViewById(R.id.formElementValue);
         mFormCustomEditTextListener = listener;
         mEditTextValue.addTextChangedListener(mFormCustomEditTextListener);
         mEditTextValue.setRawInputType(InputType.TYPE_TEXT_VARIATION_PASSWORD|InputType.TYPE_TEXT_FLAG_NO_SUGGESTIONS);
@@ -40,6 +41,14 @@ public class FormElementTextPasswordViewHolder extends BaseViewHolder {
         mTextViewTitle.setText(formElement.getTitle());
         mEditTextValue.setText(formElement.getValue());
         mEditTextValue.setHint(formElement.getHint());
+        mTextViewError.setText(formElement.getError());
+
+        if(formElement.getError().isEmpty()){
+            mTextViewError.setVisibility(View.GONE);
+        } else {
+            mTextViewError.setVisibility(View.VISIBLE);
+        }
+
         itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

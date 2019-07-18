@@ -21,6 +21,7 @@ import me.riddhimanadib.formmaster.model.FormElementPickerMulti;
 public class FormElementPickerMultiViewHolder extends BaseViewHolder {
 
     private AppCompatTextView mTextViewTitle;
+    private AppCompatTextView mTextViewError;
     private AppCompatEditText mEditTextValue;
     private ReloadListener mReloadListener;
     private BaseFormElement mFormElement;
@@ -29,8 +30,9 @@ public class FormElementPickerMultiViewHolder extends BaseViewHolder {
 
     public FormElementPickerMultiViewHolder(View v, Context context, ReloadListener reloadListener) {
         super(v);
-        mTextViewTitle = (AppCompatTextView) v.findViewById(R.id.formElementTitle);
-        mEditTextValue = (AppCompatEditText) v.findViewById(R.id.formElementValue);
+        mTextViewTitle = v.findViewById(R.id.formElementTitle);
+        mEditTextValue = v.findViewById(R.id.formElementValue);
+        mTextViewError = v.findViewById(R.id.formElementError);
         mReloadListener = reloadListener;
     }
 
@@ -40,9 +42,16 @@ public class FormElementPickerMultiViewHolder extends BaseViewHolder {
         mPosition = position;
         mFormElementPickerMulti = (FormElementPickerMulti) mFormElement;
 
+        if(formElement.getError().isEmpty()){
+            mTextViewError.setVisibility(View.GONE);
+        } else {
+            mTextViewError.setVisibility(View.VISIBLE);
+        }
+
         mTextViewTitle.setText(formElement.getTitle());
         mEditTextValue.setText(formElement.getValue());
         mEditTextValue.setHint(formElement.getHint());
+        mTextViewError.setText(formElement.getError());
         mEditTextValue.setFocusableInTouchMode(false);
 
         // reformat the options in format needed

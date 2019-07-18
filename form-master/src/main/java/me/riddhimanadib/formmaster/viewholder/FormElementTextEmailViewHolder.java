@@ -17,13 +17,14 @@ import me.riddhimanadib.formmaster.model.BaseFormElement;
 
 public class FormElementTextEmailViewHolder extends BaseViewHolder {
 
-    public AppCompatTextView mTextViewTitle;
+    public AppCompatTextView mTextViewTitle, mTextViewError;
     public AppCompatEditText mEditTextValue;
     public FormItemEditTextListener mFormCustomEditTextListener;
 
     public FormElementTextEmailViewHolder(View v, FormItemEditTextListener listener) {
         super(v);
         mTextViewTitle = (AppCompatTextView) v.findViewById(R.id.formElementTitle);
+        mTextViewError = (AppCompatTextView) v.findViewById(R.id.formElementError);
         mEditTextValue = (AppCompatEditText) v.findViewById(R.id.formElementValue);
         mFormCustomEditTextListener = listener;
         mEditTextValue.addTextChangedListener(mFormCustomEditTextListener);
@@ -37,9 +38,17 @@ public class FormElementTextEmailViewHolder extends BaseViewHolder {
 
     @Override
     public void bind(int position, BaseFormElement formElement, final Context context) {
+
+        if(formElement.getError().isEmpty()){
+            mTextViewError.setVisibility(View.GONE);
+        } else {
+            mTextViewError.setVisibility(View.VISIBLE);
+        }
+
         mTextViewTitle.setText(formElement.getTitle());
         mEditTextValue.setText(formElement.getValue());
         mEditTextValue.setHint(formElement.getHint());
+        mTextViewError.setText(formElement.getError());
         itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

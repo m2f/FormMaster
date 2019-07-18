@@ -22,5 +22,10 @@
         android:layout_height="wrap_content"
         android:id="@+id/buttonLoginActivity"
         android:text="sample login form" />
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/sampleButton"
+        android:text="sample Created form" />
 
 </LinearLayout>

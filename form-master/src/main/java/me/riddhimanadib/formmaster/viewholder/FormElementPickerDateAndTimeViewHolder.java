@@ -16,14 +16,13 @@ import androidx.appcompat.widget.AppCompatTextView;
 import me.riddhimanadib.formmaster.R;
 import me.riddhimanadib.formmaster.listener.ReloadListener;
 import me.riddhimanadib.formmaster.model.BaseFormElement;
-import me.riddhimanadib.formmaster.model.FormElementPickerDate;
 import me.riddhimanadib.formmaster.model.FormElementPickerDateAndTime;
-import me.riddhimanadib.formmaster.model.FormElementPickerTime;
 
 public class FormElementPickerDateAndTimeViewHolder extends BaseViewHolder {
 
     private AppCompatTextView mTextViewTitle;
     private AppCompatEditText mEditTextValue;
+    private AppCompatTextView mTextViewError;
     private DatePickerDialog mDatePickerDialog;
     private Calendar mCalendarCurrentDate;
     private ReloadListener mReloadListener;
@@ -38,6 +37,7 @@ public class FormElementPickerDateAndTimeViewHolder extends BaseViewHolder {
 
         mTextViewTitle = (AppCompatTextView) v.findViewById(R.id.formElementTitle);
         mEditTextValue = (AppCompatEditText) v.findViewById(R.id.formElementValue);
+        mTextViewError = (AppCompatTextView) v.findViewById(R.id.formElementError);
         mReloadListener = reloadListener;
 
         mCalendarCurrentDate = java.util.Calendar.getInstance();
@@ -59,10 +59,17 @@ public class FormElementPickerDateAndTimeViewHolder extends BaseViewHolder {
     public void bind(int position, BaseFormElement formElement, final Context context) {
         mFormElement = formElement;
         mPosition = position;
+
+        if(formElement.getError().isEmpty()){
+            mTextViewError.setVisibility(View.GONE);
+        } else {
+            mTextViewError.setVisibility(View.VISIBLE);
+        }
         mTextViewTitle.setText(formElement.getTitle());
         mEditTextValue.setText(formElement.getValue());
         mEditTextValue.setHint(formElement.getHint());
         mEditTextValue.setFocusableInTouchMode(false);
+        mTextViewError.setText(formElement.getError());
 
         mEditTextValue.setOnClickListener(new View.OnClickListener() {
             @Override

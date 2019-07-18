@@ -36,7 +36,7 @@
         android:background="@null"
         android:paddingStart="16dp"
         android:paddingEnd="16dp"
-        android:paddingBottom="16dp"
+        android:paddingBottom="4dp"
         android:paddingTop="3dp"
         android:gravity="left"
         android:imeOptions="actionNext"
@@ -45,6 +45,20 @@
         android:textColor="@color/colorFormMasterElementTextValue"
         android:textSize="@dimen/elementTextValueSize"
         tools:text="Riddhiman Adib" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/formElementError"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="2"
+        android:textColor="@color/colorFormMasterElementTextError"
+        android:textSize="@dimen/elementTextErrorSize"
+        android:textStyle="bold"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp"
+        android:paddingTop="4dp"
+        android:paddingBottom="3dp"
+        tools:text="All fields are required" />
 
 
 </LinearLayout>

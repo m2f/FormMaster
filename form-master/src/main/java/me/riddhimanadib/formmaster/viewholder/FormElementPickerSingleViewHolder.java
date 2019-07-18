@@ -19,6 +19,7 @@ import me.riddhimanadib.formmaster.model.FormElementPickerSingle;
 public class FormElementPickerSingleViewHolder extends BaseViewHolder {
 
     private AppCompatTextView mTextViewTitle;
+    private AppCompatTextView mTextViewError;
     private AppCompatEditText mEditTextValue;
     private ReloadListener mReloadListener;
     private BaseFormElement mFormElement;
@@ -27,8 +28,9 @@ public class FormElementPickerSingleViewHolder extends BaseViewHolder {
 
     public FormElementPickerSingleViewHolder(View v, Context context, ReloadListener reloadListener) {
         super(v);
-        mTextViewTitle = (AppCompatTextView) v.findViewById(R.id.formElementTitle);
-        mEditTextValue = (AppCompatEditText) v.findViewById(R.id.formElementValue);
+        mTextViewTitle = v.findViewById(R.id.formElementTitle);
+        mTextViewError = v.findViewById(R.id.formElementError);
+        mEditTextValue = v.findViewById(R.id.formElementValue);
         mReloadListener = reloadListener;
     }
 
@@ -38,9 +40,16 @@ public class FormElementPickerSingleViewHolder extends BaseViewHolder {
         mPosition = position;
         mFormElementPickerSingle = (FormElementPickerSingle) mFormElement;
 
+        if(formElement.getError().isEmpty()){
+            mTextViewError.setVisibility(View.GONE);
+        } else {
+            mTextViewError.setVisibility(View.VISIBLE);
+        }
+
         mTextViewTitle.setText(formElement.getTitle());
         mEditTextValue.setText(formElement.getValue());
         mEditTextValue.setHint(formElement.getHint());
+        mTextViewError.setText(formElement.getError());
         mEditTextValue.setFocusableInTouchMode(false);
 
         // reformat the options in format needed

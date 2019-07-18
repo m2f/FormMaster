@@ -13,8 +13,13 @@ import java.util.List;
 
 import me.riddhimanadib.formmaster.FormBuilder;
 import me.riddhimanadib.formmaster.model.BaseFormElement;
+import me.riddhimanadib.formmaster.model.FormElementPickerSingle;
 import me.riddhimanadib.formmaster.model.FormElementTextEmail;
+import me.riddhimanadib.formmaster.model.FormElementTextMultiLine;
+import me.riddhimanadib.formmaster.model.FormElementTextNumber;
 import me.riddhimanadib.formmaster.model.FormElementTextPassword;
+import me.riddhimanadib.formmaster.model.FormElementTextPhone;
+import me.riddhimanadib.formmaster.model.FormElementTextSingleLine;
 
 public class LoginFormActivity extends AppCompatActivity {
 
@@ -73,6 +78,12 @@ public class LoginFormActivity extends AppCompatActivity {
 
         mRecyclerView = (RecyclerView) findViewById(R.id.recyclerView);
         mFormBuilder = new FormBuilder(this, mRecyclerView);
+
+        List<String> fruits = new ArrayList<>();
+        fruits.add("Banana");
+        fruits.add("Orange");
+        fruits.add("Mango");
+        fruits.add("Guava");
 
         FormElementTextEmail element1 = FormElementTextEmail.createInstance().setTag(TAG_EMAIL).setTitle("Email").setRequired(true);
         FormElementTextPassword element2 = FormElementTextPassword.createInstance().setTag(TAG_PASSWORD).setTitle("Password").setRequired(true);

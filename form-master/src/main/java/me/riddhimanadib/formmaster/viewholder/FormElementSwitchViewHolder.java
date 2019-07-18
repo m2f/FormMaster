@@ -19,7 +19,7 @@ import me.riddhimanadib.formmaster.model.FormElementSwitch;
 
 public class FormElementSwitchViewHolder extends BaseViewHolder {
 
-    public AppCompatTextView mTextViewTitle, mTextViewPositive, mTextViewNegative;
+    public AppCompatTextView mTextViewTitle, mTextViewPositive, mTextViewNegative, mTextViewError;
     public SwitchCompat mSwitch;
     private ReloadListener mReloadListener;
     private BaseFormElement mFormElement;
@@ -29,6 +29,7 @@ public class FormElementSwitchViewHolder extends BaseViewHolder {
     public FormElementSwitchViewHolder(View v, Context context, ReloadListener reloadListener) {
         super(v);
         mTextViewTitle = (AppCompatTextView) v.findViewById(R.id.formElementTitle);
+        mTextViewError = (AppCompatTextView) v.findViewById(R.id.formElementError);
         mTextViewPositive = (AppCompatTextView) v.findViewById(R.id.formElementPositiveText);
         mTextViewNegative = (AppCompatTextView) v.findViewById(R.id.formElementNegativeText);
         mSwitch = (SwitchCompat) v.findViewById(R.id.formElementSwitch);
@@ -42,6 +43,12 @@ public class FormElementSwitchViewHolder extends BaseViewHolder {
         mFormElementSwitch = (FormElementSwitch) mFormElement;
 
         mTextViewTitle.setText(mFormElementSwitch.getTitle());
+        if(formElement.getError().isEmpty()){
+            mTextViewError.setVisibility(View.GONE);
+        } else {
+            mTextViewError.setVisibility(View.VISIBLE);
+        }
+        mTextViewError.setText(mFormElementSwitch.getError());
         mTextViewPositive.setText(mFormElementSwitch.getPositiveText());
         mTextViewNegative.setHint(mFormElementSwitch.getNegativeText());
         mSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
