@@ -19,8 +19,8 @@ import me.riddhimanadib.formmaster.model.FormElementSwitch;
 
 public class FormElementSwitchViewHolder extends BaseViewHolder {
 
-    public AppCompatTextView mTextViewTitle, mTextViewPositive, mTextViewNegative, mTextViewError;
-    public SwitchCompat mSwitch;
+    private AppCompatTextView mTextViewPositive, mTextViewNegative;
+    private SwitchCompat mSwitch;
     private ReloadListener mReloadListener;
     private BaseFormElement mFormElement;
     private FormElementSwitch mFormElementSwitch;
@@ -28,11 +28,9 @@ public class FormElementSwitchViewHolder extends BaseViewHolder {
 
     public FormElementSwitchViewHolder(View v, Context context, ReloadListener reloadListener) {
         super(v);
-        mTextViewTitle = (AppCompatTextView) v.findViewById(R.id.formElementTitle);
-        mTextViewError = (AppCompatTextView) v.findViewById(R.id.formElementError);
-        mTextViewPositive = (AppCompatTextView) v.findViewById(R.id.formElementPositiveText);
-        mTextViewNegative = (AppCompatTextView) v.findViewById(R.id.formElementNegativeText);
-        mSwitch = (SwitchCompat) v.findViewById(R.id.formElementSwitch);
+        mTextViewPositive = v.findViewById(R.id.formElementPositiveText);
+        mTextViewNegative = v.findViewById(R.id.formElementNegativeText);
+        mSwitch = v.findViewById(R.id.formElementSwitch);
         mReloadListener = reloadListener;
     }
 

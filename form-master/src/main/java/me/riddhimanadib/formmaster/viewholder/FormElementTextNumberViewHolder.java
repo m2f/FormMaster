@@ -16,16 +16,10 @@ import me.riddhimanadib.formmaster.model.BaseFormElement;
  */
 
 public class FormElementTextNumberViewHolder extends BaseViewHolder {
-
-    public AppCompatTextView mTextViewTitle, mTextViewError;
-    public AppCompatEditText mEditTextValue;
     public FormItemEditTextListener mFormCustomEditTextListener;
 
     public FormElementTextNumberViewHolder(View v, FormItemEditTextListener listener) {
         super(v);
-        mTextViewTitle = (AppCompatTextView) v.findViewById(R.id.formElementTitle);
-        mTextViewError = (AppCompatTextView) v.findViewById(R.id.formElementError);
-        mEditTextValue = (AppCompatEditText) v.findViewById(R.id.formElementValue);
         mFormCustomEditTextListener = listener;
         mEditTextValue.addTextChangedListener(mFormCustomEditTextListener);
         mEditTextValue.setRawInputType(InputType.TYPE_CLASS_NUMBER|InputType.TYPE_TEXT_FLAG_NO_SUGGESTIONS);
@@ -38,17 +32,8 @@ public class FormElementTextNumberViewHolder extends BaseViewHolder {
 
     @Override
     public void bind(int position, BaseFormElement formElement, final Context context) {
+        super.bind(position, formElement, context);
 
-        if(formElement.getError().isEmpty()){
-            mTextViewError.setVisibility(View.GONE);
-        } else {
-            mTextViewError.setVisibility(View.VISIBLE);
-        }
-
-        mTextViewTitle.setText(formElement.getTitle());
-        mEditTextValue.setText(formElement.getValue());
-        mEditTextValue.setHint(formElement.getHint());
-        mTextViewError.setText(formElement.getError());
         itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

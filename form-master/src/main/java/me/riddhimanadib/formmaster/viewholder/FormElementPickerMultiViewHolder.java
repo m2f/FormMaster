@@ -20,9 +20,6 @@ import me.riddhimanadib.formmaster.model.FormElementPickerMulti;
 
 public class FormElementPickerMultiViewHolder extends BaseViewHolder {
 
-    private AppCompatTextView mTextViewTitle;
-    private AppCompatTextView mTextViewError;
-    private AppCompatEditText mEditTextValue;
     private ReloadListener mReloadListener;
     private BaseFormElement mFormElement;
     private FormElementPickerMulti mFormElementPickerMulti;
@@ -30,34 +27,21 @@ public class FormElementPickerMultiViewHolder extends BaseViewHolder {
 
     public FormElementPickerMultiViewHolder(View v, Context context, ReloadListener reloadListener) {
         super(v);
-        mTextViewTitle = v.findViewById(R.id.formElementTitle);
-        mEditTextValue = v.findViewById(R.id.formElementValue);
-        mTextViewError = v.findViewById(R.id.formElementError);
         mReloadListener = reloadListener;
     }
 
     @Override
     public void bind(final int position, BaseFormElement formElement, final Context context) {
+        super.bind(position, formElement, context);
         mFormElement = formElement;
         mPosition = position;
         mFormElementPickerMulti = (FormElementPickerMulti) mFormElement;
-
-        if(formElement.getError().isEmpty()){
-            mTextViewError.setVisibility(View.GONE);
-        } else {
-            mTextViewError.setVisibility(View.VISIBLE);
-        }
-
-        mTextViewTitle.setText(formElement.getTitle());
-        mEditTextValue.setText(formElement.getValue());
-        mEditTextValue.setHint(formElement.getHint());
-        mTextViewError.setText(formElement.getError());
         mEditTextValue.setFocusableInTouchMode(false);
 
         // reformat the options in format needed
         final CharSequence[] options = new CharSequence[mFormElementPickerMulti.getOptions().size()];
         final boolean[] optionsSelected = new boolean[mFormElementPickerMulti.getOptions().size()];
-        final ArrayList<Integer> mSelectedItems = new ArrayList();
+        final ArrayList<Integer> mSelectedItems = new ArrayList<>();
 
         for (int i = 0; i < mFormElementPickerMulti.getOptions().size(); i++) {
             options[i] = mFormElementPickerMulti.getOptions().get(i);

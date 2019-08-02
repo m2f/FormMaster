@@ -17,17 +17,10 @@ import me.riddhimanadib.formmaster.model.BaseFormElement;
 
 public class FormElementTextSingleLineViewHolder extends BaseViewHolder {
 
-
-    public AppCompatTextView mTextViewTitle;
-    public AppCompatEditText mEditTextValue;
-    public AppCompatTextView mTextViewError;
     public FormItemEditTextListener mFormCustomEditTextListener;
 
     public FormElementTextSingleLineViewHolder(View v, FormItemEditTextListener listener) {
         super(v);
-        mTextViewTitle = v.findViewById(R.id.formElementTitle);
-        mEditTextValue = v.findViewById(R.id.formElementValue);
-        mTextViewError = v.findViewById(R.id.formElementError);
         mFormCustomEditTextListener = listener;
         mEditTextValue.addTextChangedListener(mFormCustomEditTextListener);
         mEditTextValue.setMaxLines(1);
@@ -40,16 +33,7 @@ public class FormElementTextSingleLineViewHolder extends BaseViewHolder {
 
     @Override
     public void bind(int position, BaseFormElement formElement, final Context context) {
-
-        if(formElement.getError().isEmpty()){
-            mTextViewError.setVisibility(View.GONE);
-        } else {
-            mTextViewError.setVisibility(View.VISIBLE);
-        }
-        mTextViewTitle.setText(formElement.getTitle());
-        mEditTextValue.setText(formElement.getValue());
-        mEditTextValue.setHint(formElement.getHint());
-        mTextViewError.setText(formElement.getError());
+        super.bind(position, formElement, context);
 
         itemView.setOnClickListener(new View.OnClickListener() {
             @Override

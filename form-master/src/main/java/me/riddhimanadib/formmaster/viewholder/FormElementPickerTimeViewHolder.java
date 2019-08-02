@@ -21,10 +21,6 @@ import me.riddhimanadib.formmaster.model.FormElementPickerTime;
  */
 
 public class FormElementPickerTimeViewHolder extends BaseViewHolder {
-
-    private AppCompatTextView mTextViewTitle;
-    private AppCompatTextView mTextViewError;
-    private AppCompatEditText mEditTextValue;
     private TimePickerDialog mTimePickerDialog;
     private Calendar mCalendarCurrentTime;
     private ReloadListener mReloadListener;
@@ -33,9 +29,6 @@ public class FormElementPickerTimeViewHolder extends BaseViewHolder {
 
     public FormElementPickerTimeViewHolder(View v, Context context, ReloadListener reloadListener) {
         super(v);
-        mTextViewTitle = v.findViewById(R.id.formElementTitle);
-        mTextViewError = v.findViewById(R.id.formElementError);
-        mEditTextValue = v.findViewById(R.id.formElementValue);
         mReloadListener = reloadListener;
         mCalendarCurrentTime = java.util.Calendar.getInstance();
         mTimePickerDialog = new TimePickerDialog(context,
@@ -47,19 +40,9 @@ public class FormElementPickerTimeViewHolder extends BaseViewHolder {
 
     @Override
     public void bind(int position, BaseFormElement formElement, final Context context) {
+        super.bind(position, formElement, context);
         mFormElement = formElement;
         mPosition = position;
-
-        if(formElement.getError().isEmpty()){
-            mTextViewError.setVisibility(View.GONE);
-        } else {
-            mTextViewError.setVisibility(View.VISIBLE);
-        }
-
-        mTextViewTitle.setText(formElement.getTitle());
-        mEditTextValue.setText(formElement.getValue());
-        mEditTextValue.setHint(formElement.getHint());
-        mTextViewError.setText(formElement.getError());
         mEditTextValue.setFocusableInTouchMode(false);
 
         mEditTextValue.setOnClickListener(new View.OnClickListener() {

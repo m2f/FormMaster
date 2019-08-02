@@ -18,11 +18,10 @@ import me.riddhimanadib.formmaster.listener.ReloadListener;
 import me.riddhimanadib.formmaster.model.BaseFormElement;
 import me.riddhimanadib.formmaster.model.FormElementPickerDateAndTime;
 
-public class FormElementPickerDateAndTimeViewHolder extends BaseViewHolder {
+public class FormElementPickerDateAndTimeViewHolder extends BaseViewHolder
+        implements DatePickerDialog.OnDateSetListener, TimePickerDialog.OnTimeSetListener {
 
-    private AppCompatTextView mTextViewTitle;
-    private AppCompatEditText mEditTextValue;
-    private AppCompatTextView mTextViewError;
+
     private DatePickerDialog mDatePickerDialog;
     private Calendar mCalendarCurrentDate;
     private ReloadListener mReloadListener;
@@ -35,21 +34,19 @@ public class FormElementPickerDateAndTimeViewHolder extends BaseViewHolder {
     public FormElementPickerDateAndTimeViewHolder(View v, Context context, ReloadListener reloadListener) {
         super(v);
 
-        mTextViewTitle = (AppCompatTextView) v.findViewById(R.id.formElementTitle);
-        mEditTextValue = (AppCompatEditText) v.findViewById(R.id.formElementValue);
-        mTextViewError = (AppCompatTextView) v.findViewById(R.id.formElementError);
+
         mReloadListener = reloadListener;
 
         mCalendarCurrentDate = java.util.Calendar.getInstance();
         mDatePickerDialog = new DatePickerDialog(context,
-                date,
+                this,
                 mCalendarCurrentDate.get(Calendar.YEAR),
                 mCalendarCurrentDate.get(Calendar.MONTH),
                 mCalendarCurrentDate.get(Calendar.DAY_OF_MONTH));
 
         mCalendarCurrentTime = java.util.Calendar.getInstance();
         mTimePickerDialog = new TimePickerDialog(context,
-                time,
+                this,
                 mCalendarCurrentTime.get(Calendar.HOUR),
                 mCalendarCurrentTime.get(Calendar.MINUTE),
                 false);
@@ -57,19 +54,10 @@ public class FormElementPickerDateAndTimeViewHolder extends BaseViewHolder {
 
     @Override
     public void bind(int position, BaseFormElement formElement, final Context context) {
+        super.bind(position, formElement, context);
         mFormElement = formElement;
         mPosition = position;
-
-        if(formElement.getError().isEmpty()){
-            mTextViewError.setVisibility(View.GONE);
-        } else {
-            mTextViewError.setVisibility(View.VISIBLE);
-        }
-        mTextViewTitle.setText(formElement.getTitle());
-        mEditTextValue.setText(formElement.getValue());
-        mEditTextValue.setHint(formElement.getHint());
         mEditTextValue.setFocusableInTouchMode(false);
-        mTextViewError.setText(formElement.getError());
 
         mEditTextValue.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -86,46 +74,42 @@ public class FormElementPickerDateAndTimeViewHolder extends BaseViewHolder {
         });
     }
 
-    String currentValue = "";
-    String newValue = "";
+    private String currentValue = "";
+    private String newValue = "";
 
-    DatePickerDialog.OnDateSetListener date = new DatePickerDialog.OnDateSetListener() {
-        @Override
-        public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
-            mCalendarCurrentDate.set(Calendar.YEAR, year);
-            mCalendarCurrentDate.set(Calendar.MONTH, monthOfYear);
-            mCalendarCurrentDate.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+    @Override
+    public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+        mCalendarCurrentDate.set(Calendar.YEAR, year);
+        mCalendarCurrentDate.set(Calendar.MONTH, monthOfYear);
+        mCalendarCurrentDate.set(Calendar.DAY_OF_MONTH, dayOfMonth);
 
-            String myFormatDate = ((FormElementPickerDateAndTime) mFormElement).getDateFormat();
-            SimpleDateFormat sdfDate = new SimpleDateFormat(myFormatDate, Locale.US);
+        String myFormatDate = ((FormElementPickerDateAndTime) mFormElement).getDateFormat();
+        SimpleDateFormat sdfDate = new SimpleDateFormat(myFormatDate, Locale.US);
 
-            currentValue = mFormElement.getValue();
-            newValue = sdfDate.format(mCalendarCurrentDate.getTime());
+        currentValue = mFormElement.getValue();
+        newValue = sdfDate.format(mCalendarCurrentDate.getTime());
 
-            // trigger event only if the value is changed
-            if (!currentValue.equals(newValue)) {
-                mReloadListener.updateValue(mPosition, newValue);
-            }
-            mTimePickerDialog.show();
+        // trigger event only if the value is changed
+        if (!currentValue.equals(newValue)) {
+            mReloadListener.updateValue(mPosition, newValue);
         }
-    };
+        mTimePickerDialog.show();
+    }
 
-    TimePickerDialog.OnTimeSetListener time = new TimePickerDialog.OnTimeSetListener() {
-        @Override
-        public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-            mCalendarCurrentTime.set(Calendar.HOUR_OF_DAY, hourOfDay);
-            mCalendarCurrentTime.set(Calendar.MINUTE, minute);
+    @Override
+    public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+        mCalendarCurrentTime.set(Calendar.HOUR_OF_DAY, hourOfDay);
+        mCalendarCurrentTime.set(Calendar.MINUTE, minute);
 
-            String myFormatTime = ((FormElementPickerDateAndTime) mFormElement).getTimeFormat(); // custom format
-            SimpleDateFormat sdfTime = new SimpleDateFormat(myFormatTime, Locale.US);
+        String myFormatTime = ((FormElementPickerDateAndTime) mFormElement).getTimeFormat(); // custom format
+        SimpleDateFormat sdfTime = new SimpleDateFormat(myFormatTime, Locale.US);
 
-            currentValue += mFormElement.getValue();
-            newValue += ", " + sdfTime.format(mCalendarCurrentTime.getTime());
+        currentValue += mFormElement.getValue();
+        newValue += ", " + sdfTime.format(mCalendarCurrentTime.getTime());
 
-            // trigger event only if the value is changed
-            if (!currentValue.equals(newValue)) {
-                mReloadListener.updateValue(mPosition, newValue);
-            }
+        // trigger event only if the value is changed
+        if (!currentValue.equals(newValue)) {
+            mReloadListener.updateValue(mPosition, newValue);
         }
-    };
+    }
 }

@@ -14,11 +14,8 @@ import me.riddhimanadib.formmaster.model.BaseFormElement;
 
 public class FormElementHeader extends BaseViewHolder {
 
-    public AppCompatTextView mTextViewTitle;
-
     public FormElementHeader(View v) {
         super(v);
-        mTextViewTitle = (AppCompatTextView) v.findViewById(R.id.formElementTitle);
     }
 
     @Override

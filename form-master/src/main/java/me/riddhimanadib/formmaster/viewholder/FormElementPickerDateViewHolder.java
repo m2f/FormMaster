@@ -21,11 +21,9 @@ import me.riddhimanadib.formmaster.model.FormElementPickerDate;
  * Created by Riddhi - Rudra on 30-Jul-17.
  */
 
-public class FormElementPickerDateViewHolder extends BaseViewHolder {
+public class FormElementPickerDateViewHolder extends BaseViewHolder
+        implements DatePickerDialog.OnDateSetListener{
 
-    private AppCompatTextView mTextViewTitle;
-    private AppCompatEditText mEditTextValue;
-    private AppCompatTextView mTextViewError;
     private DatePickerDialog mDatePickerDialog;
     private Calendar mCalendarCurrentDate;
     private ReloadListener mReloadListener;
@@ -34,35 +32,22 @@ public class FormElementPickerDateViewHolder extends BaseViewHolder {
 
     public FormElementPickerDateViewHolder(View v, Context context, ReloadListener reloadListener) {
         super(v);
-        mTextViewTitle = v.findViewById(R.id.formElementTitle);
-        mEditTextValue = v.findViewById(R.id.formElementValue);
-        mTextViewError = v.findViewById(R.id.formElementError);
         mReloadListener = reloadListener;
         mCalendarCurrentDate = java.util.Calendar.getInstance();
     }
 
     @Override
     public void bind(int position, BaseFormElement formElement, final Context context) {
+        super.bind(position, formElement, context);
         mFormElement = formElement;
         mPosition = position;
+        mEditTextValue.setFocusableInTouchMode(false);
 
         mDatePickerDialog = new DatePickerDialog(context,
-                date,
+                this,
                 mCalendarCurrentDate.get(Calendar.YEAR),
                 mCalendarCurrentDate.get(Calendar.MONTH),
                 mCalendarCurrentDate.get(Calendar.DAY_OF_MONTH));
-
-        if(formElement.getError().isEmpty()){
-            mTextViewError.setVisibility(View.GONE);
-        } else {
-            mTextViewError.setVisibility(View.VISIBLE);
-        }
-
-        mTextViewTitle.setText(formElement.getTitle());
-        mEditTextValue.setText(formElement.getValue());
-        mEditTextValue.setHint(formElement.getHint());
-        mEditTextValue.setFocusableInTouchMode(false);
-        mTextViewError.setText(formElement.getError());
 
         mEditTextValue.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -79,28 +64,22 @@ public class FormElementPickerDateViewHolder extends BaseViewHolder {
         });
     }
 
-    /**
-     * setting up date picker dialog listener
-     */
-    DatePickerDialog.OnDateSetListener date = new DatePickerDialog.OnDateSetListener() {
-        @Override
-        public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
-            mCalendarCurrentDate.set(Calendar.YEAR, year);
-            mCalendarCurrentDate.set(Calendar.MONTH, monthOfYear);
-            mCalendarCurrentDate.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+    @Override
+    public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+        mCalendarCurrentDate.set(Calendar.YEAR, year);
+        mCalendarCurrentDate.set(Calendar.MONTH, monthOfYear);
+        mCalendarCurrentDate.set(Calendar.DAY_OF_MONTH, dayOfMonth);
 
-            String myFormatDate = ((FormElementPickerDate) mFormElement).getDateFormat();
-            SimpleDateFormat sdfDate = new SimpleDateFormat(myFormatDate, Locale.US);
+        String myFormatDate = ((FormElementPickerDate) mFormElement).getDateFormat();
+        SimpleDateFormat sdfDate = new SimpleDateFormat(myFormatDate, Locale.US);
 
-            String currentValue = mFormElement.getValue();
-            String newValue = sdfDate.format(mCalendarCurrentDate.getTime());
+        String currentValue = mFormElement.getValue();
+        String newValue = sdfDate.format(mCalendarCurrentDate.getTime());
 
-            // trigger event only if the value is changed
-            if (!currentValue.equals(newValue)) {
-                mReloadListener.updateValue(mPosition, newValue);
-            }
+        // trigger event only if the value is changed
+        if (!currentValue.equals(newValue)) {
+            mReloadListener.updateValue(mPosition, newValue);
         }
-
-    };
+    }
 
 }

@@ -7,13 +7,6 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="0.5dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginRight="16dp"
-        android:background="@color/colorFormMasterDivider" />
-
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/formElementTitle"
         android:layout_width="match_parent"
@@ -24,7 +17,6 @@
         android:textStyle="bold"
         android:paddingStart="16dp"
         android:paddingEnd="16dp"
-        android:paddingTop="16dp"
         android:paddingBottom="3dp"
         tools:text="Personal Info" />
 
@@ -37,14 +29,20 @@
         android:paddingStart="16dp"
         android:paddingEnd="16dp"
         android:paddingBottom="4dp"
-        android:paddingTop="3dp"
-        android:gravity="left"
+        android:gravity="start"
         android:imeOptions="actionNext"
         android:inputType="textNoSuggestions"
         android:maxLines="1"
         android:textColor="@color/colorFormMasterElementTextValue"
         android:textSize="@dimen/elementTextValueSize"
         tools:text="Riddhiman Adib" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:background="@color/colorFormMasterDivider" />
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/formElementError"
@@ -57,8 +55,9 @@
         android:paddingStart="16dp"
         android:paddingEnd="16dp"
         android:paddingTop="4dp"
-        android:paddingBottom="3dp"
+        android:visibility="invisible"
         tools:text="All fields are required" />
+
 
 
 </LinearLayout>
