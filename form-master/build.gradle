@@ -14,7 +14,7 @@ ext {
     siteUrl = 'https://github.com/adib2149/FormMaster'
     gitUrl = 'https://github.com/adib2149/FormMaster.git'
 
-    libraryVersion = '1.2.0'
+    libraryVersion = '1.2.1'
 
     developerId = 'adib2149'
     developerName = 'Riddhiman Adib'
@@ -51,6 +51,3 @@ dependencies {
     implementation 'androidx.appcompat:appcompat:1.0.2'
     implementation 'androidx.recyclerview:recyclerview:1.0.0'
 }
-
-//apply from: 'install.gradle'
-//apply from: 'bintray.gradle'
