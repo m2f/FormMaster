@@ -10,9 +10,9 @@ public class FormElementTextNumber extends BaseFormElement {
     }
 
     public static FormElementTextNumber createInstance() {
-        FormElementTextNumber FormElementTextNumber = new FormElementTextNumber();
-        FormElementTextNumber.setType(BaseFormElement.TYPE_EDITTEXT_NUMBER);
-        return FormElementTextNumber;
+        FormElementTextNumber formElementTextNumber = new FormElementTextNumber();
+        formElementTextNumber.setType(BaseFormElement.TYPE_EDITTEXT_NUMBER);
+        return formElementTextNumber;
     }
 
     public FormElementTextNumber setTag(int mTag) {

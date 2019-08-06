@@ -20,6 +20,7 @@ import me.riddhimanadib.formmaster.viewholder.FormElementPickerDateViewHolder;
 import me.riddhimanadib.formmaster.viewholder.FormElementPickerMultiViewHolder;
 import me.riddhimanadib.formmaster.viewholder.FormElementPickerSingleViewHolder;
 import me.riddhimanadib.formmaster.viewholder.FormElementPickerTimeViewHolder;
+import me.riddhimanadib.formmaster.viewholder.FormElementStepperViewHolder;
 import me.riddhimanadib.formmaster.viewholder.FormElementSwitchViewHolder;
 import me.riddhimanadib.formmaster.viewholder.FormElementTextEmailViewHolder;
 import me.riddhimanadib.formmaster.viewholder.FormElementTextMultiLineViewHolder;
@@ -39,6 +40,7 @@ public class FormAdapter extends RecyclerView.Adapter<BaseViewHolder> implements
     private Context mContext;
     private List<BaseFormElement> mDataset;
     private OnFormElementValueChangedListener mListener;
+    private boolean isGrouped = false;
 
     /**
      * public constructor with context
@@ -47,6 +49,17 @@ public class FormAdapter extends RecyclerView.Adapter<BaseViewHolder> implements
     public FormAdapter(Context context, OnFormElementValueChangedListener listener) {
         mContext = context;
         mListener = listener;
+        mDataset = new ArrayList<>();
+    }
+
+    /**
+     * public constructor with context
+     * @param context
+     */
+    public FormAdapter(Context context, OnFormElementValueChangedListener listener, boolean isGrouped) {
+        mContext = context;
+        mListener = listener;
+        this.isGrouped = isGrouped;
         mDataset = new ArrayList<>();
     }
 
@@ -164,49 +177,53 @@ public class FormAdapter extends RecyclerView.Adapter<BaseViewHolder> implements
 
         // get layout based on header or element type
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
+        int layout = isGrouped ? R.layout.form_element_box : R.layout.form_element;
         View v;
         switch (viewType) {
             case BaseFormElement.TYPE_HEADER:
                 v = inflater.inflate(R.layout.form_element_header, parent, false);
                 return new FormElementHeader(v);
             case BaseFormElement.TYPE_EDITTEXT_TEXT_SINGLELINE:
-                v = inflater.inflate(R.layout.form_element, parent, false);
+                v = inflater.inflate(layout, parent, false);
                 return new FormElementTextSingleLineViewHolder(v, new FormItemEditTextListener(this));
             case BaseFormElement.TYPE_EDITTEXT_TEXT_MULTILINE:
-                v = inflater.inflate(R.layout.form_element, parent, false);
+                v = inflater.inflate(layout, parent, false);
                 return new FormElementTextMultiLineViewHolder(v, new FormItemEditTextListener(this));
             case BaseFormElement.TYPE_EDITTEXT_NUMBER:
-                v = inflater.inflate(R.layout.form_element, parent, false);
+                v = inflater.inflate(layout, parent, false);
                 return new FormElementTextNumberViewHolder(v, new FormItemEditTextListener(this));
             case BaseFormElement.TYPE_EDITTEXT_EMAIL:
-                v = inflater.inflate(R.layout.form_element, parent, false);
+                v = inflater.inflate(layout, parent, false);
                 return new FormElementTextEmailViewHolder(v, new FormItemEditTextListener(this));
             case BaseFormElement.TYPE_EDITTEXT_PHONE:
-                v = inflater.inflate(R.layout.form_element, parent, false);
+                v = inflater.inflate(layout, parent, false);
                 return new FormElementTextPhoneViewHolder(v, new FormItemEditTextListener(this));
             case BaseFormElement.TYPE_EDITTEXT_PASSWORD:
-                v = inflater.inflate(R.layout.form_element, parent, false);
+                v = inflater.inflate(layout, parent, false);
                 return new FormElementTextPasswordViewHolder(v, new FormItemEditTextListener(this));
             case BaseFormElement.TYPE_PICKER_DATE:
-                v = inflater.inflate(R.layout.form_element, parent, false);
+                v = inflater.inflate(layout, parent, false);
                 return new FormElementPickerDateViewHolder(v, mContext, this);
             case BaseFormElement.TYPE_PICKER_TIME:
-                v = inflater.inflate(R.layout.form_element, parent, false);
+                v = inflater.inflate(layout, parent, false);
                 return new FormElementPickerTimeViewHolder(v, mContext, this);
             case BaseFormElement.TYPE_PICKER_SINGLE:
-                v = inflater.inflate(R.layout.form_element, parent, false);
+                v = inflater.inflate(layout, parent, false);
                 return new FormElementPickerSingleViewHolder(v, mContext, this);
             case BaseFormElement.TYPE_PICKER_MULTI:
-                v = inflater.inflate(R.layout.form_element, parent, false);
+                v = inflater.inflate(layout, parent, false);
                 return new FormElementPickerMultiViewHolder(v, mContext, this);
+            case BaseFormElement.TYPE_DATE_AND_TIME:
+                v = inflater.inflate(layout, parent, false);
+                return new FormElementPickerDateAndTimeViewHolder(v, mContext, this);
             case BaseFormElement.TYPE_SWITCH:
                 v = inflater.inflate(R.layout.form_element_switch, parent, false);
                 return new FormElementSwitchViewHolder(v, mContext, this);
-            case BaseFormElement.TYPE_DATE_AND_TIME:
-                v = inflater.inflate(R.layout.form_element, parent, false);
-                return new FormElementPickerDateAndTimeViewHolder(v, mContext, this);
+            case BaseFormElement.TYPE_STEPPER:
+                v  = inflater.inflate(R.layout.form_element_stepper, parent, false);
+                return new FormElementStepperViewHolder(v, inflater, this);
             default:
-                v = inflater.inflate(R.layout.form_element, parent, false);
+                v = inflater.inflate(layout, parent, false);
                 return new FormElementTextSingleLineViewHolder(v, new FormItemEditTextListener(this));
         }
     }

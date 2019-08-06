@@ -7,4 +7,12 @@
     <color name="colorFormMasterElementTextValue">#000000</color>
     <color name="colorFormMasterElementTextError">#F30404</color>
     <color name="colorFormMasterDivider">#DDDDDD</color>
+
+    <color name="stepper_icon_color">#212121</color>
+    <color name="stepper_label_color">#616161</color>
+
+    <color name="white">#FFFFFF</color>
+    <color name="text_dark">#616161</color>
+    <color name="grey_background">#E6E6E6</color>
+    <color name="box_label_color">#9E9E9E</color>
 </resources>

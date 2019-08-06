@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:tools="http://schemas.android.com/tools"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              android:orientation="vertical"
+              android:background="@color/colorFormMasterElementBackground"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content">
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/formElementTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="2"
+        android:textColor="@color/colorFormMasterElementTextTitle"
+        android:textSize="@dimen/elementTextTitleSize"
+        android:textStyle="bold"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp"
+        android:paddingBottom="3dp"
+        tools:text="Personal Info" />
+
+    <androidx.appcompat.widget.AppCompatEditText
+        android:id="@+id/formElementValue"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="3"
+        android:background="@null"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp"
+        android:paddingBottom="4dp"
+        android:gravity="start"
+        android:imeOptions="actionNext"
+        android:inputType="textNoSuggestions"
+        android:maxLines="1"
+        android:textColor="@color/colorFormMasterElementTextValue"
+        android:textSize="@dimen/elementTextValueSize"
+        tools:text="Riddhiman Adib" />
+
+    <LinearLayout
+        android:id="@+id/stepper_options_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:background="@color/colorFormMasterDivider" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/formElementError"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="2"
+        android:textColor="@color/colorFormMasterElementTextError"
+        android:textSize="@dimen/elementTextErrorSize"
+        android:textStyle="bold"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp"
+        android:paddingTop="4dp"
+        android:visibility="invisible"
+        tools:text="All fields are required" />
+
+</LinearLayout>

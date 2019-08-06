@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:tools="http://schemas.android.com/tools"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:background="@drawable/fm_grey_border"
+              android:paddingStart="16dp"
+              android:paddingEnd="16dp"
+              android:orientation="vertical">
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/formElementTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/box_label_color"
+        android:paddingTop="16dp"
+        android:textSize="13sp"
+        tools:text="Personal Info"/>
+
+    <androidx.appcompat.widget.AppCompatEditText
+        android:id="@+id/formElementValue"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@null"
+        android:gravity="start"
+        android:imeOptions="actionNext"
+        android:inputType="textNoSuggestions"
+        android:maxLines="1"
+        android:textColor="@color/colorFormMasterElementTextValue"
+        android:textSize="15sp"
+        android:textStyle="bold"
+        tools:text="Riddhiman Adib"/>
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/formElementError"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/colorFormMasterElementTextError"
+        android:textSize="@dimen/elementTextErrorSize"
+        android:visibility="invisible"
+        tools:text="All fields are required"/>
+
+</LinearLayout>
