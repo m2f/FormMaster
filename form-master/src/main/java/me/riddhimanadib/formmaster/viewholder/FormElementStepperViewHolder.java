@@ -21,11 +21,13 @@ public class FormElementStepperViewHolder extends BaseViewHolder {
     LinearLayout stepperContainer;
     private LayoutInflater inflater;
     private ReloadListener reloadListener;
+    TextView mStepperValue;
 
     public FormElementStepperViewHolder(View v, LayoutInflater inflater, ReloadListener reloadListener) {
         super(v);
         this.stepperContainer = v.findViewById(R.id.stepper_options_container);
         this.inflater = inflater;
+        this.mStepperValue = v.findViewById(R.id.formElementSteeperValue);
         this.reloadListener = reloadListener;
     }
 
@@ -40,10 +42,10 @@ public class FormElementStepperViewHolder extends BaseViewHolder {
             mTextViewError.setVisibility(View.VISIBLE);
         }
         mTextViewError.setText(formElementStepper.getError());
-        mEditTextValue.setFocusableInTouchMode(false);
+        mStepperValue.setFocusableInTouchMode(false);
         String stepperValue = formElementStepper.getStepperValue();
         formElement.setValue(stepperValue);
-        mEditTextValue.setText(stepperValue);
+        mStepperValue.setText(stepperValue);
 
         stepperContainer.removeAllViews();
         for(final String option: formElementStepper.getStepperOptions()) {

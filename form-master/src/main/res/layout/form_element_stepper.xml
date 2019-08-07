@@ -15,24 +15,22 @@
         android:textColor="@color/colorFormMasterElementTextTitle"
         android:textSize="@dimen/elementTextTitleSize"
         android:textStyle="bold"
-        android:paddingStart="16dp"
-        android:paddingEnd="16dp"
+        android:paddingStart="8dp"
+        android:paddingTop="16dp"
+        android:paddingEnd="8dp"
         android:paddingBottom="3dp"
         tools:text="Personal Info" />
 
-    <androidx.appcompat.widget.AppCompatEditText
-        android:id="@+id/formElementValue"
+    <TextView
+        android:id="@+id/formElementSteeperValue"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="3"
         android:background="@null"
-        android:paddingStart="16dp"
+        android:paddingStart="8dp"
         android:paddingEnd="16dp"
         android:paddingBottom="4dp"
         android:gravity="start"
-        android:imeOptions="actionNext"
-        android:inputType="textNoSuggestions"
-        android:maxLines="1"
         android:textColor="@color/colorFormMasterElementTextValue"
         android:textSize="@dimen/elementTextValueSize"
         tools:text="Riddhiman Adib" />

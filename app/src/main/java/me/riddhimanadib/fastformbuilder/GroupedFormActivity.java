@@ -10,6 +10,7 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 import me.riddhimanadib.formmaster.FormBuilder;
+import me.riddhimanadib.formmaster.model.BaseFormElement;
 import me.riddhimanadib.formmaster.model.FormElementPickerDate;
 import me.riddhimanadib.formmaster.model.FormElementPickerMulti;
 import me.riddhimanadib.formmaster.model.FormElementPickerSingle;
@@ -69,18 +70,18 @@ public class GroupedFormActivity extends AppCompatActivity {
         List<GroupedBaseFormElement> formElements = new ArrayList<>();
         FormElementTextEmail element11 = FormElementTextEmail.createInstance().setTitle("Email").setHint("Enter Email");
         FormElementTextPhone element12 = FormElementTextPhone.createInstance().setTitle("Phone").setValue("+8801712345678");
-        formElements.add(GroupedBaseFormElement.newInstance("Personal Info", element11, element12));
+        //formElements.add(GroupedBaseFormElement.newInstance("Personal Info", element11, element12));
 
 
         FormElementTextSingleLine element21 = FormElementTextSingleLine.createInstance().setTitle("Location").setValue("Dhaka");
         FormElementTextMultiLine element22 = FormElementTextMultiLine.createInstance().setTitle("Address");
         FormElementTextNumber element23 = FormElementTextNumber.createInstance().setTitle("Zip Code").setValue("1000");
-        formElements.add(GroupedBaseFormElement.newInstance("Family Info", element21, element22, element23));
+        //formElements.add(GroupedBaseFormElement.newInstance("Family Info", element21, element22, element23));
 
         FormElementPickerDate element31 = FormElementPickerDate.createInstance().setTitle("Date").setDateFormat("MMM dd, yyyy");
         FormElementPickerTime element32 = FormElementPickerTime.createInstance().setTitle("Time").setTimeFormat("hh mm a");
         FormElementTextPassword element33 = FormElementTextPassword.createInstance().setTitle("Password").setValue("abcd1234");
-        formElements.add(GroupedBaseFormElement.newInstance("Schedule", element31, element32, element33));
+        //formElements.add(GroupedBaseFormElement.newInstance("Schedule", element31, element32, element33));
 
         List<String> fruits = new ArrayList<>();
         fruits.add("Banana");
@@ -93,11 +94,22 @@ public class GroupedFormActivity extends AppCompatActivity {
         stepperOptions.add("Kids (Age 4 - 12 Yrs)");
         stepperOptions.add("Infants (Below 3 Yrs)");
 
+
         FormElementPickerSingle element41 = FormElementPickerSingle.createInstance().setTitle("Single Item").setOptions(fruits).setPickerTitle("Pick any item").setHint("Tap here to select");
         FormElementPickerMulti element42 = FormElementPickerMulti.createInstance().setTitle("Multi Items").setOptions(fruits).setPickerTitle("Pick one or more").setNegativeText("reset").setHint("Tap here to choose");
-        FormElementSwitch element43 = FormElementSwitch.createInstance().setTitle("Frozen?").setSwitchTexts("Yes", "No");
+
+        List<BaseFormElement > formElementList = new ArrayList<>();
+        formElementList.add(element11);
+        formElementList.add(element12);
+        formElementList.add(element31);
+        formElementList.add(element32);
+        formElementList.add(element41);
+        formElementList.add(element42);
+
+        //FormElementSwitch element43 = FormElementSwitch.createInstance().setTitle("Frozen?").setSwitchTexts("Yes", "No");
         FormElementStepper element44 = FormElementStepper.createInstance().setTitle("Traveller's Detail").setStepperOptions(stepperOptions);
-        formElements.add(GroupedBaseFormElement.newInstance("Preferred Items", element41, element42, element43, element44));
+        formElements.add(GroupedBaseFormElement.newInstance("Adult-1").setItems(formElementList));
+        formElements.add(GroupedBaseFormElement.newInstance("Adult-2", element11, element12, element31, element32, element41, element42));
 
         mFormBuilder.addGroupFormElements(formElements);
 
