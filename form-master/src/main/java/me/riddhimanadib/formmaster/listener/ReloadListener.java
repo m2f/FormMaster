@@ -7,4 +7,5 @@ package me.riddhimanadib.formmaster.listener;
 
 public interface ReloadListener {
     void updateValue(int position, String updatedValue);
+    void updateRatingValue(int position, float rating);
 }

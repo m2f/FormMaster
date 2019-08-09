@@ -9,5 +9,6 @@ import me.riddhimanadib.formmaster.model.BaseFormElement;
 public interface OnFormElementValueChangedListener {
 
     void onValueChanged(BaseFormElement baseFormElement);
+    void onRatingValueChanged(BaseFormElement baseFormElement);
 
 }

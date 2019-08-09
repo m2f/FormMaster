@@ -50,8 +50,13 @@ public class FormElementPickerSingleViewHolder extends BaseViewHolder {
                     mFormElementPickerSingle.setValue(options[which].toString());
                     mReloadListener.updateValue(position, options[which].toString());
                 }
-            })
-            .create();
+            }).setNegativeButton("Clear", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int id) {
+                                mEditTextValue.getText().clear();
+                                mReloadListener.updateValue(position, null);
+                            }
+                }).create();
 
         mEditTextValue.setOnClickListener(new View.OnClickListener() {
             @Override

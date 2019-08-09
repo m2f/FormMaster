@@ -85,7 +85,13 @@ public class FormElementPickerMultiViewHolder extends BaseViewHolder {
                         mReloadListener.updateValue(position, s);
                     }
                 })
-                .setNegativeButton(mFormElementPickerMulti.getNegativeText(), null)
+                .setNegativeButton(mFormElementPickerMulti.getNegativeText(), new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int id) {
+                        mEditTextValue.getText().clear();
+                        mReloadListener.updateValue(position, null);
+                    }
+                })
                 .create();
 
         mEditTextValue.setOnClickListener(new View.OnClickListener() {

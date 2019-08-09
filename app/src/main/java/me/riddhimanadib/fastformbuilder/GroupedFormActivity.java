@@ -15,6 +15,7 @@ import me.riddhimanadib.formmaster.model.FormElementPickerDate;
 import me.riddhimanadib.formmaster.model.FormElementPickerMulti;
 import me.riddhimanadib.formmaster.model.FormElementPickerSingle;
 import me.riddhimanadib.formmaster.model.FormElementPickerTime;
+import me.riddhimanadib.formmaster.model.FormElementRatingBar;
 import me.riddhimanadib.formmaster.model.FormElementStepper;
 import me.riddhimanadib.formmaster.model.FormElementSwitch;
 import me.riddhimanadib.formmaster.model.FormElementTextEmail;
@@ -97,6 +98,7 @@ public class GroupedFormActivity extends AppCompatActivity {
 
         FormElementPickerSingle element41 = FormElementPickerSingle.createInstance().setTitle("Single Item").setOptions(fruits).setPickerTitle("Pick any item").setHint("Tap here to select");
         FormElementPickerMulti element42 = FormElementPickerMulti.createInstance().setTitle("Multi Items").setOptions(fruits).setPickerTitle("Pick one or more").setNegativeText("reset").setHint("Tap here to choose");
+        FormElementRatingBar element45 = FormElementRatingBar.createInstance().setTitle("Rating").setRequired(true);
 
         List<BaseFormElement > formElementList = new ArrayList<>();
         formElementList.add(element11);
@@ -104,12 +106,14 @@ public class GroupedFormActivity extends AppCompatActivity {
         formElementList.add(element31);
         formElementList.add(element32);
         formElementList.add(element41);
+        formElementList.add(element45);
         formElementList.add(element42);
 
         //FormElementSwitch element43 = FormElementSwitch.createInstance().setTitle("Frozen?").setSwitchTexts("Yes", "No");
         FormElementStepper element44 = FormElementStepper.createInstance().setTitle("Traveller's Detail").setStepperOptions(stepperOptions);
+
         formElements.add(GroupedBaseFormElement.newInstance("Adult-1").setItems(formElementList));
-        formElements.add(GroupedBaseFormElement.newInstance("Adult-2", element11, element12, element31, element32, element41, element42));
+        formElements.add(GroupedBaseFormElement.newInstance("Adult-2", element11, element12, element31, element32, element41, element45, element42));
 
         mFormBuilder.addGroupFormElements(formElements);
 
