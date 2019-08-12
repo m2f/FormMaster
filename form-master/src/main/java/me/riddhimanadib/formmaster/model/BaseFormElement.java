@@ -21,6 +21,7 @@ public class BaseFormElement {
     public static final int TYPE_SWITCH = 11;
     public static final int TYPE_DATE_AND_TIME = 12;
     public static final int TYPE_STEPPER = 13;
+    public static final int TYPE_RATING_BAR = 14;
 
     // private variables
     private int mTag; // unique tag to identify the object
@@ -30,6 +31,7 @@ public class BaseFormElement {
     private String mHint; // value to be shown if mValue is null
     private boolean mRequired; // value to set is the field is required
     private String mError;
+    private float mRatingValue;
 
     // setters
     public BaseFormElement setTag(int mTag) {
@@ -67,6 +69,11 @@ public class BaseFormElement {
         return this;
     }
 
+    public BaseFormElement setRatingValue(float mRatingValue) {
+        this.mRatingValue = mRatingValue;
+        return this;
+    }
+
     // getters
     public int getTag() {
         return this.mTag;
@@ -96,11 +103,14 @@ public class BaseFormElement {
         return (this.mError == null ) ? "" : this.mError;
     }
 
+    public float getRatingValue() {return this.mRatingValue; }
+
     @Override
     public String toString() {
         return "BaseFormElement{" +
                 "mTag=" + mTag +
                 ", mType=" + mType +
+                ", mRatingValue=" + mRatingValue +
                 ", mTitle='" + mTitle + '\'' +
                 ", mValue='" + mValue + '\'' +
                 ", mHint='" + mHint + '\'' +

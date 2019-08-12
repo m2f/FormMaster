@@ -20,6 +20,7 @@ import me.riddhimanadib.formmaster.viewholder.FormElementPickerDateViewHolder;
 import me.riddhimanadib.formmaster.viewholder.FormElementPickerMultiViewHolder;
 import me.riddhimanadib.formmaster.viewholder.FormElementPickerSingleViewHolder;
 import me.riddhimanadib.formmaster.viewholder.FormElementPickerTimeViewHolder;
+import me.riddhimanadib.formmaster.viewholder.FormElementRatingBarViewHolder;
 import me.riddhimanadib.formmaster.viewholder.FormElementStepperViewHolder;
 import me.riddhimanadib.formmaster.viewholder.FormElementSwitchViewHolder;
 import me.riddhimanadib.formmaster.viewholder.FormElementTextEmailViewHolder;
@@ -222,6 +223,9 @@ public class FormAdapter extends RecyclerView.Adapter<BaseViewHolder> implements
             case BaseFormElement.TYPE_STEPPER:
                 v  = inflater.inflate(R.layout.form_element_stepper, parent, false);
                 return new FormElementStepperViewHolder(v, inflater, this);
+            case BaseFormElement.TYPE_RATING_BAR:
+                v = inflater.inflate(R.layout.form_element_rating_bar, parent, false);
+                return new FormElementRatingBarViewHolder(v, mContext, this);
             default:
                 v = inflater.inflate(layout, parent, false);
                 return new FormElementTextSingleLineViewHolder(v, new FormItemEditTextListener(this));
@@ -257,6 +261,14 @@ public class FormAdapter extends RecyclerView.Adapter<BaseViewHolder> implements
         notifyDataSetChanged();
         if (mListener != null)
             mListener.onValueChanged(mDataset.get(position));
+    }
+
+    @Override
+    public void updateRatingValue(int position, float rating) {
+        mDataset.get(position).setRatingValue(rating);
+        notifyDataSetChanged();
+        if (mListener != null)
+            mListener.onRatingValueChanged(mDataset.get(position));
     }
 
 }

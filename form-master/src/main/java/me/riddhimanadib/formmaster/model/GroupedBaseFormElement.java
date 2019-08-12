@@ -22,8 +22,9 @@ public class GroupedBaseFormElement {
         return items;
     }
 
-    public void setItems(List<BaseFormElement> items) {
+    public GroupedBaseFormElement setItems(List<BaseFormElement> items) {
         this.items = items;
+        return this;
     }
 
     public static GroupedBaseFormElement newInstance(String headerText, BaseFormElement... baseFormElements) {

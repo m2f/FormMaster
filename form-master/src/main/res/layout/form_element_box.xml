@@ -13,8 +13,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textColor="@color/box_label_color"
-        android:paddingTop="16dp"
-        android:textSize="13sp"
+        android:paddingTop="12dp"
+        android:textSize="12sp"
         tools:text="Personal Info"/>
 
     <androidx.appcompat.widget.AppCompatEditText
@@ -27,7 +27,7 @@
         android:inputType="textNoSuggestions"
         android:maxLines="1"
         android:textColor="@color/colorFormMasterElementTextValue"
-        android:textSize="15sp"
+        android:textSize="14sp"
         android:textStyle="bold"
         tools:text="Riddhiman Adib"/>
 

@@ -17,6 +17,7 @@ import me.riddhimanadib.formmaster.model.FormElementPickerDate;
 import me.riddhimanadib.formmaster.model.FormElementPickerMulti;
 import me.riddhimanadib.formmaster.model.FormElementPickerSingle;
 import me.riddhimanadib.formmaster.model.FormElementPickerTime;
+import me.riddhimanadib.formmaster.model.FormElementRatingBar;
 import me.riddhimanadib.formmaster.model.FormElementStepper;
 import me.riddhimanadib.formmaster.model.FormElementSwitch;
 import me.riddhimanadib.formmaster.model.FormElementTextEmail;
@@ -99,6 +100,8 @@ public class FormListenerActivity extends AppCompatActivity implements OnFormEle
         stepperOptions.add("Infants (Below 3 Yrs)");
         FormElementStepper element44 = FormElementStepper.createInstance().setTitle("Traveller's Detail").setStepperOptions(stepperOptions);
 
+        FormElementRatingBar element45 = FormElementRatingBar.createInstance().setTitle("Rating").setRequired(true);
+
         List<BaseFormElement> formItems = new ArrayList<>();
         formItems.add(header1);
         formItems.add(element11);
@@ -116,6 +119,7 @@ public class FormListenerActivity extends AppCompatActivity implements OnFormEle
         formItems.add(element42);
         formItems.add(element43);
         formItems.add(element44);
+        formItems.add(element45);
         mFormBuilder.addFormElements(formItems);
 
     }
@@ -123,5 +127,10 @@ public class FormListenerActivity extends AppCompatActivity implements OnFormEle
     @Override
     public void onValueChanged(BaseFormElement formElement) {
         Toast.makeText(this, formElement.getValue(), Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onRatingValueChanged(BaseFormElement formElement) {
+        Toast.makeText(this, Float.toString(formElement.getRatingValue()), Toast.LENGTH_SHORT).show();
     }
 }
