@@ -1,18 +1,17 @@
 package me.riddhimanadib.formmaster.viewholder;
 
-import android.app.DatePickerDialog;
-import android.app.TimePickerDialog;
 import android.content.Context;
 import android.view.View;
-import android.widget.DatePicker;
-import android.widget.TimePicker;
+
+import com.wdullaer.materialdatetimepicker.date.DatePickerDialog;
+import com.wdullaer.materialdatetimepicker.time.TimePickerDialog;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Locale;
 
-import androidx.appcompat.widget.AppCompatEditText;
-import androidx.appcompat.widget.AppCompatTextView;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 import me.riddhimanadib.formmaster.R;
 import me.riddhimanadib.formmaster.listener.ReloadListener;
 import me.riddhimanadib.formmaster.model.BaseFormElement;
@@ -24,6 +23,7 @@ public class FormElementPickerDateAndTimeViewHolder extends BaseViewHolder
 
     private DatePickerDialog mDatePickerDialog;
     private Calendar mCalendarCurrentDate;
+    private AppCompatActivity context;
     private ReloadListener mReloadListener;
     private BaseFormElement mFormElement;
     private int mPosition;
@@ -33,27 +33,30 @@ public class FormElementPickerDateAndTimeViewHolder extends BaseViewHolder
 
     public FormElementPickerDateAndTimeViewHolder(View v, Context context, ReloadListener reloadListener) {
         super(v);
-
-
+        this.context = (AppCompatActivity) context;
         mReloadListener = reloadListener;
 
         mCalendarCurrentDate = java.util.Calendar.getInstance();
-        mDatePickerDialog = new DatePickerDialog(context,
-                this,
+        mDatePickerDialog = DatePickerDialog.newInstance(this,
                 mCalendarCurrentDate.get(Calendar.YEAR),
                 mCalendarCurrentDate.get(Calendar.MONTH),
                 mCalendarCurrentDate.get(Calendar.DAY_OF_MONTH));
 
+        int dateTimePickerColor = ContextCompat.getColor(context,
+                R.color.date_time_picker_background_color);
+
+        mDatePickerDialog.setAccentColor(dateTimePickerColor);
+
+
         mCalendarCurrentTime = java.util.Calendar.getInstance();
-        mTimePickerDialog = new TimePickerDialog(context,
-                this,
+        mTimePickerDialog = TimePickerDialog.newInstance(this,
                 mCalendarCurrentTime.get(Calendar.HOUR),
-                mCalendarCurrentTime.get(Calendar.MINUTE),
-                false);
+                mCalendarCurrentTime.get(Calendar.MINUTE), false);
+        mTimePickerDialog.setAccentColor(dateTimePickerColor);
     }
 
     @Override
-    public void bind(int position, BaseFormElement formElement, final Context context) {
+    public void bind(int position, final BaseFormElement formElement, final Context context) {
         super.bind(position, formElement, context);
         mFormElement = formElement;
         mPosition = position;
@@ -62,14 +65,14 @@ public class FormElementPickerDateAndTimeViewHolder extends BaseViewHolder
         mEditTextValue.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mDatePickerDialog.show();
+                mDatePickerDialog.show(((AppCompatActivity)context).getSupportFragmentManager(), formElement.getTitle());
             }
         });
 
         mTextViewTitle.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mDatePickerDialog.show();
+                mDatePickerDialog.show(((AppCompatActivity)context).getSupportFragmentManager(), formElement.getTitle());
             }
         });
     }
@@ -78,7 +81,7 @@ public class FormElementPickerDateAndTimeViewHolder extends BaseViewHolder
     private String newValue = "";
 
     @Override
-    public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+    public void onDateSet(DatePickerDialog view, int year, int monthOfYear, int dayOfMonth) {
         mCalendarCurrentDate.set(Calendar.YEAR, year);
         mCalendarCurrentDate.set(Calendar.MONTH, monthOfYear);
         mCalendarCurrentDate.set(Calendar.DAY_OF_MONTH, dayOfMonth);
@@ -93,11 +96,11 @@ public class FormElementPickerDateAndTimeViewHolder extends BaseViewHolder
         if (!currentValue.equals(newValue)) {
             mReloadListener.updateValue(mPosition, newValue);
         }
-        mTimePickerDialog.show();
+        mTimePickerDialog.show(context.getSupportFragmentManager(), "");
     }
 
     @Override
-    public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+    public void onTimeSet(TimePickerDialog view, int hourOfDay, int minute, int second) {
         mCalendarCurrentTime.set(Calendar.HOUR_OF_DAY, hourOfDay);
         mCalendarCurrentTime.set(Calendar.MINUTE, minute);
 

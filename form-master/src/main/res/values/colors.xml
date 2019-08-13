@@ -15,4 +15,6 @@
     <color name="text_dark">#616161</color>
     <color name="grey_background">#E6E6E6</color>
     <color name="box_label_color">#9E9E9E</color>
+
+    <color name="date_time_picker_background_color">@color/grey_background</color>
 </resources>

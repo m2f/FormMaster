@@ -1,17 +1,15 @@
 package me.riddhimanadib.formmaster.viewholder;
 
-import android.app.TimePickerDialog;
 import android.content.Context;
-import androidx.appcompat.widget.AppCompatEditText;
-import androidx.appcompat.widget.AppCompatTextView;
 import android.view.View;
-import android.widget.TimePicker;
+
+import com.wdullaer.materialdatetimepicker.time.TimePickerDialog;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Locale;
 
-import me.riddhimanadib.formmaster.R;
+import androidx.appcompat.app.AppCompatActivity;
 import me.riddhimanadib.formmaster.listener.ReloadListener;
 import me.riddhimanadib.formmaster.model.BaseFormElement;
 import me.riddhimanadib.formmaster.model.FormElementPickerTime;
@@ -27,19 +25,19 @@ public class FormElementPickerTimeViewHolder extends BaseViewHolder {
     private BaseFormElement mFormElement;
     private int mPosition;
 
-    public FormElementPickerTimeViewHolder(View v, Context context, ReloadListener reloadListener) {
+    public FormElementPickerTimeViewHolder(View v, ReloadListener reloadListener) {
         super(v);
         mReloadListener = reloadListener;
         mCalendarCurrentTime = java.util.Calendar.getInstance();
-        mTimePickerDialog = new TimePickerDialog(context,
-                time,
+        mTimePickerDialog = TimePickerDialog.newInstance(
+                timeCallback,
                 mCalendarCurrentTime.get(Calendar.HOUR),
                 mCalendarCurrentTime.get(Calendar.MINUTE),
                 false);
     }
 
     @Override
-    public void bind(int position, BaseFormElement formElement, final Context context) {
+    public void bind(int position, final BaseFormElement formElement, final Context context) {
         super.bind(position, formElement, context);
         mFormElement = formElement;
         mPosition = position;
@@ -48,14 +46,14 @@ public class FormElementPickerTimeViewHolder extends BaseViewHolder {
         mEditTextValue.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mTimePickerDialog.show();
+                mTimePickerDialog.show(((AppCompatActivity)context).getSupportFragmentManager(), formElement.getTitle());
             }
         });
 
         mTextViewTitle.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mTimePickerDialog.show();
+                mTimePickerDialog.show(((AppCompatActivity)context).getSupportFragmentManager(), formElement.getTitle());
             }
         });
     }
@@ -63,9 +61,9 @@ public class FormElementPickerTimeViewHolder extends BaseViewHolder {
     /**
      * setting up time picker dialog listener
      */
-    TimePickerDialog.OnTimeSetListener time = new TimePickerDialog.OnTimeSetListener() {
+    private TimePickerDialog.OnTimeSetListener timeCallback = new TimePickerDialog.OnTimeSetListener() {
         @Override
-        public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+        public void onTimeSet(TimePickerDialog view, int hourOfDay, int minute, int second) {
             mCalendarCurrentTime.set(Calendar.HOUR_OF_DAY, hourOfDay);
             mCalendarCurrentTime.set(Calendar.MINUTE, minute);
 
@@ -81,5 +79,4 @@ public class FormElementPickerTimeViewHolder extends BaseViewHolder {
             }
         }
     };
-
 }

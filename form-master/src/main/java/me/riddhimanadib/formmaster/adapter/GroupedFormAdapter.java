@@ -1,6 +1,5 @@
 package me.riddhimanadib.formmaster.adapter;
 
-import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,6 +9,7 @@ import java.util.Collections;
 import java.util.List;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import me.riddhimanadib.formmaster.R;
@@ -18,10 +18,12 @@ import me.riddhimanadib.formmaster.model.GroupedBaseFormElement;
 
 public class GroupedFormAdapter extends RecyclerView.Adapter<GroupedFormAdapter.GroupedFormViewHolder> {
 
-    List<GroupedBaseFormElement> groupedItems;
+    private List<GroupedBaseFormElement> groupedItems;
+    private AppCompatActivity context;
     private OnFormElementValueChangedListener listener;
 
-    public GroupedFormAdapter(OnFormElementValueChangedListener listener) {
+    public GroupedFormAdapter(AppCompatActivity context, OnFormElementValueChangedListener listener) {
+        this.context = context;
         this.listener = listener;
         this.groupedItems = Collections.emptyList();
     }
@@ -43,7 +45,8 @@ public class GroupedFormAdapter extends RecyclerView.Adapter<GroupedFormAdapter.
     public void onBindViewHolder(@NonNull GroupedFormViewHolder holder, int position) {
         GroupedBaseFormElement groupedBaseFormElement = groupedItems.get(position);
         holder.headerTextView.setText(groupedBaseFormElement.getHeaderText());
-        FormAdapter formAdapter = new FormAdapter(holder.context, listener, true);
+        FormAdapter formAdapter = new FormAdapter(context, listener, true);
+        groupedBaseFormElement.setFormAdapter(formAdapter);
         holder.formItemList.setAdapter(formAdapter);
         formAdapter.addElements(groupedBaseFormElement.getItems());
     }
@@ -53,15 +56,17 @@ public class GroupedFormAdapter extends RecyclerView.Adapter<GroupedFormAdapter.
         return groupedItems.size();
     }
 
+    public List<GroupedBaseFormElement> getGroupedItems() {
+        return groupedItems;
+    }
+
     static class GroupedFormViewHolder extends RecyclerView.ViewHolder {
 
         TextView headerTextView;
         RecyclerView formItemList;
-        Context context;
 
         public GroupedFormViewHolder(@NonNull View itemView) {
             super(itemView);
-            this.context = itemView.getContext();
             headerTextView = itemView.findViewById(R.id.group_header);
             formItemList =itemView.findViewById(R.id.group_item_list);
             LinearLayoutManager linearLayoutManager = new LinearLayoutManager(itemView.getContext());

@@ -3,10 +3,13 @@ package me.riddhimanadib.formmaster.model;
 import java.util.Arrays;
 import java.util.List;
 
+import me.riddhimanadib.formmaster.adapter.FormAdapter;
+
 public class GroupedBaseFormElement {
 
     private String headerText;
     private List<BaseFormElement> items;
+    private FormAdapter formAdapter;
 
     private GroupedBaseFormElement() {}
 
@@ -25,6 +28,14 @@ public class GroupedBaseFormElement {
     public GroupedBaseFormElement setItems(List<BaseFormElement> items) {
         this.items = items;
         return this;
+    }
+
+    public FormAdapter getFormAdapter() {
+        return formAdapter;
+    }
+
+    public void setFormAdapter(FormAdapter formAdapter) {
+        this.formAdapter = formAdapter;
     }
 
     public static GroupedBaseFormElement newInstance(String headerText, BaseFormElement... baseFormElements) {

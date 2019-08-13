@@ -12,8 +12,8 @@
         android:id="@+id/formElementTitle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textColor="@color/box_label_color"
         android:paddingTop="12dp"
+        android:textColor="@color/box_label_color"
         android:textSize="12sp"
         tools:text="Personal Info"/>
 
