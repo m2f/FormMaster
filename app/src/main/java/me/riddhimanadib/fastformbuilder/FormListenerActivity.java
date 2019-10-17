@@ -97,7 +97,8 @@ public class FormListenerActivity extends AppCompatActivity implements OnFormEle
         List<String> stepperOptions = new ArrayList<>();
         stepperOptions.add("Adult");
         stepperOptions.add("Kids (Age 4 - 12 Yrs)");
-        stepperOptions.add("Infants (Below 3 Yrs)");
+        stepperOptions.add("IInfant (under 2 years old)");
+        stepperOptions.add("Infant (under 2 years old abcd abcd)");
         FormElementStepper element44 = FormElementStepper.createInstance().setTitle("Traveller's Detail").setStepperOptions(stepperOptions);
 
         FormElementRatingBar element45 = FormElementRatingBar.createInstance().setTitle("Rating").setRequired(true);

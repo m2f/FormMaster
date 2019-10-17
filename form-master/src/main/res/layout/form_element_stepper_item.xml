@@ -2,6 +2,7 @@
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
               android:layout_width="match_parent"
               android:layout_height="wrap_content"
               android:layout_gravity="center_horizontal"
@@ -17,7 +18,9 @@
             android:layout_weight="3"
             android:layout_marginEnd="12dp"
             android:gravity="start"
-            android:textColor="@color/stepper_label_color" />
+            android:layout_gravity="center_vertical"
+            android:textColor="@color/stepper_label_color"
+            tools:text="These is some long text and can span really long what happens if these is more longer"/>
 
         <ImageView
             android:id="@+id/stepper_minus"
@@ -35,6 +38,7 @@
             android:layout_height="40dp"
             android:layout_weight="1"
             android:gravity="center"
+            android:layout_gravity="center_vertical"
             android:textSize="18sp" />
 
         <ImageView
