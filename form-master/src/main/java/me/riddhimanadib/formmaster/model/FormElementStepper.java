@@ -79,16 +79,19 @@ public class FormElementStepper extends BaseFormElement {
         StringBuilder value = new StringBuilder();
         boolean isFirst = true;
         for(String stepperOption : stepperCounts.keySet()) {
+            String count = getStepperCount(stepperOption);
+            if("0".equalsIgnoreCase(count)) {
+                continue;
+            }
             if(isFirst) {
                 isFirst = false;
             } else {
                 value.append(" / ");
             }
-            Integer count = stepperCounts.get(stepperOption);
-            value.append((null == count) ? "0" : count.toString());
-            value.append(" ").append(stepperOption);
+            value.append(count).append(" ").append(stepperOption);
         }
-        return value.toString();
+        String val = value.toString();
+        return val.isEmpty() ? getHint() : val;
     }
 
     public void addCount(String option) {
