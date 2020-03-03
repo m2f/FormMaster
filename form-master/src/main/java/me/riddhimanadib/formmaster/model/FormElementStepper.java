@@ -7,6 +7,8 @@ import java.util.Map;
 
 public class FormElementStepper extends BaseFormElement {
 
+    public static final String OPTION_SEP = " / ";
+    public static final String COUNT_SEP = " ";
     private List<String> stepperOptions;
     private Map<String, Integer> stepperCounts;
 
@@ -36,6 +38,21 @@ public class FormElementStepper extends BaseFormElement {
 
     public FormElementStepper setValue(String mValue) {
         super.setValue(mValue);
+        if(null != mValue && mValue.length() > 0) {
+            String[] optionValues = mValue.split(OPTION_SEP);
+            for(String optionValue : optionValues) {
+                int sepIndex = optionValue.indexOf(COUNT_SEP);
+                if(sepIndex > 0) {
+                    String stepperKey = optionValue.substring(sepIndex + 1, optionValue.length());
+                    String stepperValue = optionValue.substring(0, sepIndex);
+                    try {
+                        stepperCounts.put(stepperKey, Integer.parseInt(stepperValue));
+                    } catch (Exception e) {
+                        stepperCounts.put(stepperKey, 0);
+                    }
+                }
+            }
+        }
         return this;
     }
 
@@ -86,9 +103,9 @@ public class FormElementStepper extends BaseFormElement {
             if(isFirst) {
                 isFirst = false;
             } else {
-                value.append(" / ");
+                value.append(OPTION_SEP);
             }
-            value.append(count).append(" ").append(stepperOption);
+            value.append(count).append(COUNT_SEP).append(stepperOption);
         }
         String val = value.toString();
         return val.isEmpty() ? getHint() : val;

@@ -3,10 +3,6 @@ package me.riddhimanadib.formmaster.model;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by Riddhi - Rudra on 28-Jul-17.
- */
-
 public class FormElementPickerSingle extends BaseFormElement {
 
     private String pickerTitle; // custom title for picker
