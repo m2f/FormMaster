@@ -2,9 +2,9 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/FormMaster.iml" filepath="$PROJECT_DIR$/FormMaster.iml" />
-      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
-      <module fileurl="file://$PROJECT_DIR$/form-master/form-master.iml" filepath="$PROJECT_DIR$/form-master/form-master.iml" />
+      <module fileurl="file://$PROJECT_DIR$/FormMaster.iml" filepath="$PROJECT_DIR$/FormMaster.iml" group="FormMaster" />
+      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" group="FormMaster/app" />
+      <module fileurl="file://$PROJECT_DIR$/form-master/form-master.iml" filepath="$PROJECT_DIR$/form-master/form-master.iml" group="FormMaster/form-master" />
     </modules>
   </component>
 </project>

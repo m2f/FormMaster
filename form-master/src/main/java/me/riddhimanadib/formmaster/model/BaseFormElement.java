@@ -1,5 +1,7 @@
 package me.riddhimanadib.formmaster.model;
 
+import java.util.Calendar;
+
 /**
  * Created by Adib on 16-Apr-17.
  */
@@ -32,6 +34,8 @@ public class BaseFormElement {
     private boolean mRequired; // value to set is the field is required
     private String mError;
     private float mRatingValue;
+    private Calendar[] dates;
+    private boolean isBlockDates;
 
     // setters
     public BaseFormElement setTag(int mTag) {
@@ -74,6 +78,16 @@ public class BaseFormElement {
         return this;
     }
 
+    public BaseFormElement setDates(Calendar[] enabledDates){
+        this.dates = enabledDates;
+        return this;
+    }
+
+    public BaseFormElement setIsBlockDates(boolean isBlockDates){
+        this.isBlockDates = isBlockDates;
+        return this;
+    }
+
     // getters
     public int getTag() {
         return this.mTag;
@@ -104,6 +118,14 @@ public class BaseFormElement {
     }
 
     public float getRatingValue() {return this.mRatingValue; }
+
+    public Calendar[] getDates() {
+        return dates;
+    }
+
+    public boolean isBlockDates() {
+        return isBlockDates;
+    }
 
     @Override
     public String toString() {

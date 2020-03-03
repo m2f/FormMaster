@@ -1,14 +1,23 @@
 package me.riddhimanadib.fastformbuilder;
 
 import android.os.Bundle;
-import androidx.appcompat.app.ActionBar;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.RecyclerView;
+import android.util.Log;
 import android.view.MenuItem;
 import android.widget.Toast;
 
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.RecyclerView;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
+import java.util.Set;
+import java.util.TreeSet;
 
 import me.riddhimanadib.formmaster.FormBuilder;
 import me.riddhimanadib.formmaster.listener.OnFormElementValueChangedListener;
@@ -79,8 +88,41 @@ public class FormListenerActivity extends AppCompatActivity implements OnFormEle
         FormElementTextMultiLine element22 = FormElementTextMultiLine.createInstance().setTitle("Address");
         FormElementTextNumber element23 = FormElementTextNumber.createInstance().setTitle("Zip Code").setValue("1000");
 
+        Set<Calendar> enableDates = new TreeSet<>(Calendar::compareTo);
+        Calendar minDate = Calendar.getInstance();
+        String[] dates = new String[]{"18-10-2019",
+                "19-02-2020",
+                "25-02-2020",
+                "26-02-2020",
+                "01-03-2020",
+                "02-03-2020",
+                "09-03-2020",
+                "08-03-2020",
+                "15-03-2020",
+                "16-03-2020",
+                "23-03-2020",
+                "30-03-2020"};
+
+        for (String date : dates) {
+            Date allowedDate = parseToDate(new SimpleDateFormat("dd-MM-yyyy", Locale.ENGLISH), date);
+            if (null != allowedDate) {
+                Calendar cal = Calendar.getInstance();
+                cal.setTime(allowedDate);
+                int compare = cal.compareTo(minDate);
+                if (compare >= 0) {
+                    enableDates.add(cal);
+                }
+            }
+        }
+
         FormHeader header3 = FormHeader.createInstance("Schedule");
         FormElementPickerDate element31 = FormElementPickerDate.createInstance().setTitle("Date").setDateFormat("MMM dd, yyyy");
+
+        if (enableDates.size() > 0) {
+            Calendar[] datesToEnable = enableDates.toArray(new Calendar[0]);
+            element31.setDates(datesToEnable);
+            element31.setIsBlockDates(false);
+        }
         FormElementPickerTime element32 = FormElementPickerTime.createInstance().setTitle("Time").setTimeFormat("hh mm a");
         FormElementTextPassword element33 = FormElementTextPassword.createInstance().setTitle("Password").setValue("abcd1234");
 
@@ -123,6 +165,17 @@ public class FormListenerActivity extends AppCompatActivity implements OnFormEle
         formItems.add(element45);
         mFormBuilder.addFormElements(formItems);
 
+    }
+
+    public static Date parseToDate(SimpleDateFormat format, String dateStr) {
+        if (!(dateStr == null || dateStr.trim().isEmpty())) {
+            try {
+                return format.parse(dateStr);
+            } catch (ParseException ex) {
+                Log.e("Error", "parseToDate: ");
+            }
+        }
+        return null;
     }
 
     @Override

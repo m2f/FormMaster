@@ -1,6 +1,7 @@
 package me.riddhimanadib.formmaster.model;
 
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Locale;
 
 /**
@@ -22,27 +23,27 @@ public class FormElementPickerDate extends BaseFormElement {
     }
 
     public FormElementPickerDate setTag(int mTag) {
-        return (FormElementPickerDate)  super.setTag(mTag);
+        return (FormElementPickerDate) super.setTag(mTag);
     }
 
     public FormElementPickerDate setType(int mType) {
-        return (FormElementPickerDate)  super.setType(mType);
+        return (FormElementPickerDate) super.setType(mType);
     }
 
     public FormElementPickerDate setTitle(String mTitle) {
-        return (FormElementPickerDate)  super.setTitle(mTitle);
+        return (FormElementPickerDate) super.setTitle(mTitle);
     }
 
     public FormElementPickerDate setValue(String mValue) {
-        return (FormElementPickerDate)  super.setValue(mValue);
+        return (FormElementPickerDate) super.setValue(mValue);
     }
 
     public FormElementPickerDate setHint(String mHint) {
-        return (FormElementPickerDate)  super.setHint(mHint);
+        return (FormElementPickerDate) super.setHint(mHint);
     }
 
     public FormElementPickerDate setRequired(boolean required) {
-        return (FormElementPickerDate)  super.setRequired(required);
+        return (FormElementPickerDate) super.setRequired(required);
     }
 
     // custom setter
@@ -57,6 +58,14 @@ public class FormElementPickerDate extends BaseFormElement {
         return this.dateFormat;
     }
 
+    public FormElementPickerDate setDates(Calendar[] datesToEnable) {
+        return (FormElementPickerDate) super.setDates(datesToEnable);
+    }
+
+    public FormElementPickerDate setIsBlockDates(boolean isBlockDates) {
+        return (FormElementPickerDate) super.setIsBlockDates(isBlockDates);
+    }
+
     private void checkValidDateFormat(String format) {
         try {
             new SimpleDateFormat(format, Locale.US);
@@ -64,5 +73,5 @@ public class FormElementPickerDate extends BaseFormElement {
             throw new RuntimeException("Date format is not correct: " + e.getMessage());
         }
     }
-    
+
 }
